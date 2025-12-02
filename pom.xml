@@ -49,20 +49,12 @@
         </dependency>
     </dependencies>
 
-    <distributionManagement>
-        <repository>
-            <id>github-repo</id>
-            <name>GitHub sberg Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/sberg-net/repo</url>
-        </repository>
-    </distributionManagement>
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.2</version>
+                <version>3.14.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -71,7 +63,7 @@
                 <executions>
                     <execution>
                         <id>attach-sources</id>
-                        <phase>deploy</phase>
+                        <phase>install</phase>
                         <goals><goal>jar-no-fork</goal></goals>
                     </execution>
                 </executions>
@@ -83,7 +75,7 @@
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
-                        <phase>deploy</phase>
+                        <phase>install</phase>
                         <goals><goal>jar</goal></goals>
                     </execution>
                 </executions>
