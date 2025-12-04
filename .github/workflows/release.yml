@@ -51,3 +51,12 @@ jobs:
         id: build_maven
         run: |
           mvn -B package -Dmaven.test.skip --file pom.xml
+
+      - name: Publish new version
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/pipeline-${{ steps.pom-data.outputs.version }}.jar
+          tag: pipeline-${{ steps.pom-data.outputs.version }}
+          overwrite: false
+          body: ${{ steps.changelog_for_pom_version.outputs.changes }}
