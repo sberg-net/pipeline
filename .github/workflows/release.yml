@@ -50,4 +50,4 @@ jobs:
       - name: Build with Maven
         id: build_maven
         run: |
-          mvn -B package -Dskip-Dmaven.test.skip --file pom.xml
+          mvn -B package -Dmaven.test.skip --file pom.xml
