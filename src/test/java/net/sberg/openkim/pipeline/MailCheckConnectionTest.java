@@ -4,14 +4,10 @@ import jakarta.mail.AuthenticationFailedException;
 import net.sberg.openkim.pipeline.atomics.mail.MailCheckConnection;
 import net.sberg.openkim.pipeline.atomics.mail.MailGetSession;
 import net.sberg.openkim.pipeline.atomics.mail.MailKeys;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
