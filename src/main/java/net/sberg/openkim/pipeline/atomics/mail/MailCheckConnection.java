@@ -1,9 +1,6 @@
 package net.sberg.openkim.pipeline.atomics.mail;
 
-import jakarta.mail.MessagingException;
-import jakarta.mail.NoSuchProviderException;
-import jakarta.mail.Session;
-import jakarta.mail.Transport;
+import jakarta.mail.*;
 import net.sberg.openkim.pipeline.AtomicInputException;
 import net.sberg.openkim.pipeline.PipelineOp;
 import org.eclipse.angus.mail.pop3.POP3Folder;
@@ -18,20 +15,22 @@ import java.util.Properties;
 /**
  * Atomic MailCheckConnection to check connection by giving properties and credentials.
  * A {@code Map<String,Object>} will be used for input / output information transport.
- * @Input   key: {@code MAIL_SESSION_PROPS}
- *          value: SessionProperties [{@code Map<String, Object>}] and
- *          key: {@code MAIL_AUTH_USER}<br>
- *          value: Username [{@code String}] <br>
- *          key: {@code MAIL_AUTH_PASSWORD}<br>
- *          value: Password [{@code String}] <br>
- * @Output  all inputs
+ *
+ * @Input key: {@code MAIL_SESSION_PROPS}
+ * value: SessionProperties [{@code Map<String, Object>}] and
+ * key: {@code MAIL_AUTH_USER}<br>
+ * value: Username [{@code String}] <br>
+ * key: {@code MAIL_AUTH_PASSWORD}<br>
+ * value: Password [{@code String}] <br>
+ * @Output all inputs
  */
 
 public class MailCheckConnection extends MailKeys implements PipelineOp {
 
-    @SuppressWarnings("unchecked")
     @Override
-    public Map<String,Object> execute(Map input) throws MessagingException {
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    public Map<String, Object> execute(Map input) throws MessagingException {
+        Logger logger = LoggerFactory.getLogger(MailCheckConnection.class);
 
         if (input.get(MAIL_SESSION) == null)
             throw new AtomicInputException("MAIL_SESSION not exist or is null!");
@@ -46,18 +45,33 @@ public class MailCheckConnection extends MailKeys implements PipelineOp {
                 ? Optional.of((String) input.get(MAIL_AUTH_PASSWORD))
                 : Optional.empty();
 
-        Optional<String> protocol = session.getProperty("mail.transport.protocol") != null
-                ? Optional.ofNullable(session.getProperty("mail.transport.protocol"))
-                : Optional.ofNullable(session.getProperty("mail.store.protocol"));
+        Optional<String> protocol = session.getProperty("mail.store.protocol") != null
+                ? Optional.ofNullable(session.getProperty("mail.store.protocol"))
+                : Optional.ofNullable(session.getProperty("mail.transport.protocol"));
 
+        Provider provider = session.getProvider(protocol.orElseThrow(()
+                -> new AtomicInputException("No mail.store.protocol or mail.transport.protocol found in Session!")));
 
-        Transport transport = session.getTransport(protocol.orElseThrow(()
-                -> new AtomicInputException("No mail.transport.protocol or mail.store.protocol found in Session!")));
-
-        if (username.isPresent() && password.isPresent()) {
-            transport.connect(username.get(), password.get());
+        if (provider.getType() == Provider.Type.TRANSPORT) {
+            logger.debug("Found protocol {} check connection with Transport", protocol.get());
+            Transport transport = session.getTransport(provider);
+            if (username.isPresent() && password.isPresent()) {
+                transport.connect(username.get(), password.get());
+                transport.close();
+            } else {
+                transport.connect();
+                transport.close();
+            }
         } else {
-            transport.connect();
+            logger.debug("Found protocol {} check connection with Store", protocol.get());
+            Store store = session.getStore(provider);
+            if (username.isPresent() && password.isPresent()){
+                store.connect(username.get(), password.get());
+                store.close();
+            } else {
+                store.connect();
+                store.close();
+            }
         }
         return input;
     }
