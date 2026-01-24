@@ -581,4 +581,21 @@ public class MailTest extends MailKeys {
         MimeMessage message1 = (MimeMessage) contentTypeCleanerOff.get(MAIL_MIMEMESSAGE);
         message1.saveChanges();
     }
+
+    @Test
+    void testSendDateIsEmpty() throws Exception {
+
+        log.info("Classname of GenericContentTypeCleaner: {}", GenericContentTypeCleaner.class.getName());
+
+        Map<String, Object> contentTypeCleanerOff = new HashMap<>() {{
+            put(MAIL_FILE, new File("src/test/resources/testMailWithNullDate.eml"));
+        }};
+
+        contentTypeCleanerOff = new MailGetMimeMessage().execute(contentTypeCleanerOff);
+        MimeMessage message = (MimeMessage) contentTypeCleanerOff.get(MAIL_MIMEMESSAGE);
+
+        MessageHeadInfo msgHeadInfo = new MessageHeadInfo();
+        msgHeadInfo.setSendDate(message.getSentDate());
+        message.saveChanges();
+    }
 }

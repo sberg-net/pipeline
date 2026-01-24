@@ -9,7 +9,7 @@ public class GenericContentTypeCleaner {
 
     static Logger logger = LoggerFactory.getLogger(GenericContentTypeCleaner.class);
 
-    public static final String cleanContentType(MimePart mp, String contentType) {
+    public static String cleanContentType(MimePart mp, String contentType) {
         try {
             new ContentType(contentType);
             return contentType;

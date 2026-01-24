@@ -55,10 +55,14 @@ public class MailKeys {
     public static final String MAIL_MODTEXTBODY_HTML = "mail.modtextbody.html";
     public static final String MAIL_MODTEXTBODY_TYPE = "mail.modtextbody.type";
 
-    // Fetch message header from POP3 folder
+    // Fetch message header from the POP3 folder
     public static final String MAIL_POP3FETCHMSGINFO = "mail.pop3fetchmsginfo";
 
     // Delete pop3 message by pop3 uid
     public static final String MAIL_POP3DELETEMESSAGES = "mail.pop3deletemessages";
     public static final String MAIL_POP3DELETEMESSAGES_DELCOUNT = "mail.pop3deletemessages.delcount";
+
+    // generic parameter
+    public static final String MAIL_AUTH_USER = "mail.auth.user";
+    public static final String MAIL_AUTH_PASSWORD = "mail.auth.password";
 }
