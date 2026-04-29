@@ -598,4 +598,24 @@ public class MailTest extends MailKeys {
         msgHeadInfo.setSendDate(message.getSentDate());
         message.saveChanges();
     }
+
+    @Test void MailRemovePersonalFromRecipients() throws Exception {
+
+        Map<String, Object> recipientsReplace = new HashMap<>(){{
+            put(MAIL_FILE, new File("src/test/resources/testMailforRemovePersonal.eml"));
+            put(MAIL_RECIPIENTS_TYPES, new ArrayList<Message.RecipientType>(){{
+                add(Message.RecipientType.CC);
+                add(Message.RecipientType.BCC);
+                add(Message.RecipientType.TO);
+            }});
+        }};
+
+        new MailGetMimeMessage().andThen(new MailRemovePersonalFromRecipients()).execute(recipientsReplace);
+
+        MimeMessage message = (MimeMessage) recipientsReplace.get(MAIL_MIMEMESSAGE);
+        assert message.getRecipients(Message.RecipientType.TO)[0].toString().equals("st.schoenberg@sberg.net");
+        assert message.getRecipients(Message.RecipientType.CC)[0].toString().equals("derlinuxer@sberg.net");
+        assert Arrays.toString(message.getRecipients(Message.RecipientType.CC)).equals("[derlinuxer@sberg.net, test2@bsp.com]");
+        assert message.getRecipients(Message.RecipientType.BCC)[0].toString().equals("st.schoenberg@sberg.net");
+    }
 }
