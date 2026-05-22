@@ -166,7 +166,6 @@ public class MailTest extends MailKeys {
             add(new Header("sberg", "gmbh"));
             add(new Header("X-APP", "openKim"));
             add(new Header("Subject", "openKim"));
-            add(new Header("Nix", null));
         }};
         Map<String, Object> mHeader = new HashMap<>(){{
             put(MAIL_FILE, new File("src/test/resources/testMail.eml"));
@@ -182,7 +181,12 @@ public class MailTest extends MailKeys {
         assert(message.getHeader("X-APP")[0].equals("openKim"));
         assert(message.getHeader("Subject").length == 1);
         assert(message.getHeader("Subject")[0].equals("openKim"));
-        assert(message.getHeader("Nix") == null);
+
+        headers.add(new Header("sberg", null));
+        mHeader = new MailSetHeader().execute(mHeader);
+        message = (MimeMessage) mHeader.get(MAIL_MIMEMESSAGE);
+        message.saveChanges();
+        assert(message.getHeader("sberg") == null);
     }
 
     @Test void testMailSetFrom() throws Exception {

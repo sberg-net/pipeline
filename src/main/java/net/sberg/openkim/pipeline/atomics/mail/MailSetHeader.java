@@ -37,7 +37,10 @@ public class MailSetHeader extends MailKeys implements PipelineOp {
 
         List<Header> headerList = (List<Header>) input.get(MAIL_HEADER);
         for (Header header : headerList) {
-            message.setHeader(header.getName(), header.getValue());
+            if (header.getValue() == null)
+                message.removeHeader(header.getName());
+            else
+                message.setHeader(header.getName(), header.getValue());
         }
         return input;
     }
