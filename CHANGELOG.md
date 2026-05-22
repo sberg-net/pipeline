@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.5.1]
+
+### Fixed
+* fix remove header with null value in SetHeader atomic
+
 ## [1.5.0]
 
 ### Added
