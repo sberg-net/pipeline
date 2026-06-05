@@ -1,9 +1,7 @@
 package net.sberg.openkim.pipeline;
 
-import jakarta.mail.Address;
 import jakarta.mail.internet.AddressException;
 import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.InternetHeaders;
 import net.sberg.openkim.pipeline.atomics.mail.MailKeys;
 import org.junit.jupiter.api.Test;
 

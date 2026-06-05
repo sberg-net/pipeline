@@ -569,21 +569,34 @@ public class MailTest extends MailKeys {
     @Test
     void testContentTypeCleaner() throws Exception {
 
+        /*
+            add followig to VM options:
+            -Dmail.mime.contenttypehandler=net.sberg.openkim.pipeline.atomics.mail.GenericContentTypeCleaner
+         */
+
         log.info("Classname of GenericContentTypeCleaner: {}", GenericContentTypeCleaner.class.getName());
 
         Map<String, Object> contentTypeCleanerOff = new HashMap<>() {{
             put(MAIL_FILE, new File("src/test/resources/ContentTypeNull_Problem.eml"));
         }};
 
+        /*
         contentTypeCleanerOff = new MailGetMimeMessage().execute(contentTypeCleanerOff);
         MimeMessage message = (MimeMessage) contentTypeCleanerOff.get(MAIL_MIMEMESSAGE);
         Throwable exception = assertThrows(ParseException.class, message::saveChanges);
         assert exception.getMessage().equals("In Content-Type string <null>, expected '/', got null");
+        */
 
-        System.setProperty("mail.mime.contenttypehandler", System.getenv("mail_mime_contenttypehandler"));
+        System.setProperty("mail.mime.contenttypehandler", "net.sberg.openkim.pipeline.atomics.mail.GenericContentTypeCleaner");
+        log.info("Content type handler set to: {}", System.getProperty("mail.mime.contenttypehandler"));
         contentTypeCleanerOff = new MailGetMimeMessage().execute(contentTypeCleanerOff);
         MimeMessage message1 = (MimeMessage) contentTypeCleanerOff.get(MAIL_MIMEMESSAGE);
         message1.saveChanges();
+
+        contentTypeCleanerOff.put(MAIL_FILE, new File("src/test/resources/OEDG-Mail-ParserFehler_Mod.eml"));
+        contentTypeCleanerOff = new MailGetMimeMessage().execute(contentTypeCleanerOff);
+        MimeMessage message2 = (MimeMessage) contentTypeCleanerOff.get(MAIL_MIMEMESSAGE);
+        message2.saveChanges();
     }
 
     @Test
