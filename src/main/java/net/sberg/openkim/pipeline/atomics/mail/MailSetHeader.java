@@ -5,6 +5,8 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import net.sberg.openkim.pipeline.AtomicInputException;
 import net.sberg.openkim.pipeline.PipelineOp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -22,6 +24,8 @@ import java.util.Map;
 
 public class MailSetHeader extends MailKeys implements PipelineOp {
 
+    Logger logger = LoggerFactory.getLogger(MailSetHeader.class);
+
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
     public Map<String,Object> execute(Map input) throws MessagingException, AtomicInputException {
@@ -37,10 +41,14 @@ public class MailSetHeader extends MailKeys implements PipelineOp {
 
         List<Header> headerList = (List<Header>) input.get(MAIL_HEADER);
         for (Header header : headerList) {
-            if (header.getValue() == null)
+            if (header.getValue() == null) {
+                logger.debug("Remove header {} from message", header.getName());
                 message.removeHeader(header.getName());
-            else
+            }
+            else {
+                logger.debug("Set header {} value {} to message", header.getName(), header.getValue());
                 message.setHeader(header.getName(), header.getValue());
+            }
         }
         return input;
     }
