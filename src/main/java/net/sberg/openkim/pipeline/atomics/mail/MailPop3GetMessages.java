@@ -101,13 +101,17 @@ public class MailPop3GetMessages extends MailKeys implements PipelineOp {
             }
 
             for(Message message : messages) {
-                if (pop3Uids.isEmpty() || pop3Uids.contains(folder.getUID(message))){
-                    if (!flags.isEmpty()){
-                        for(Flags.Flag flag : flags) {
-                            message.setFlag(flag, true);
+                try {
+                    if (pop3Uids.isEmpty() || pop3Uids.contains(folder.getUID(message))){
+                        if (!flags.isEmpty()){
+                            for(Flags.Flag flag : flags) {
+                                message.setFlag(flag, true);
+                            }
                         }
+                        mimeMessages.add(new MimeMessage((MimeMessage)message));
                     }
-                    mimeMessages.add(new MimeMessage((MimeMessage)message));
+                } catch (MessagingException e) {
+                    logger.error("Error on processing message", e);
                 }
             }
         } finally {
