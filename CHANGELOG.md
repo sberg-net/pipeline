@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.6.1]
+
+### Fixed
+* fix a complete break on getting pop3 messages (MailPop3GetMessages)
+
 ## [1.6.0]
 
 ### Added
