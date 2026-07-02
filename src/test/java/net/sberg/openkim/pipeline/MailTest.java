@@ -4,7 +4,6 @@ import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeBodyPart;
 import jakarta.mail.internet.MimeMessage;
-import jakarta.mail.internet.ParseException;
 import net.sberg.openkim.pipeline.atomics.mail.*;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -151,7 +150,7 @@ public class MailTest extends MailKeys {
             .execute(getRecipients);
 
         assert(getRecipients.get(MAIL_RECIPIENTS) instanceof List<?>);
-        assert(( (List<?>) getRecipients.get(MAIL_RECIPIENTS))).get(0)
+        assert(( (List<?>) getRecipients.get(MAIL_RECIPIENTS))).getFirst()
                 .equals("Chirurgie_am_Goethepark_Cottbus.800704300@i-motion.kim.telematik");
 
         getRecipients.put(MAIL_RECIPIENTS_TYPES, new ArrayList<>(){{ add(Message.RecipientType.CC); }});
@@ -558,8 +557,7 @@ public class MailTest extends MailKeys {
 
         List<MessageHeadInfo> msgInfos = (List<MessageHeadInfo>) fetchPop3Messages.get(MAIL_POP3FETCHMSGINFO);
         assert !msgInfos.isEmpty();
-        assert !msgInfos.get(0).getMsgId().isBlank();
-        //noinspection StatementWithEmptyBody
+        assert !msgInfos.getFirst().getMsgId().isBlank();
         for (MessageHeadInfo info : msgInfos) {
              log.info("\nSubject: {}\nPop3UID: {}\nTo: {}\nCc: {}\nFrom: {}\nDate: {}\nSize: {}",info.getSubject(),
                     info.getUid(), info.getTo(), info.getCc(), info.getFrom(), info.getSendDate(), info.getSize());
