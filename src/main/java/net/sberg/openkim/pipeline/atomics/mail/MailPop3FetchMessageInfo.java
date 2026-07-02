@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -72,6 +73,13 @@ public class MailPop3FetchMessageInfo extends MailKeys implements PipelineOp {
             for (Message msg : msgs) {
                 MessageHeadInfo headInfo = getMessageHeadInfo(msg, folder);
                 msgInfoList.add(headInfo);
+                Enumeration<Header> headers = msg.getAllHeaders();
+                StringBuilder allHeader = new StringBuilder();
+                while (headers.hasMoreElements()) {
+                    Header header = headers.nextElement();
+                    allHeader.append(header.getName()).append(" = ").append(header.getValue()).append("\n");
+                }
+                logger.debug("All Header from Message (to: {}, from: {}):\n{}", msg.getRecipients(Message.RecipientType.TO)[0], msg.getFrom()[0], allHeader);
             }
         } finally {
             try {
