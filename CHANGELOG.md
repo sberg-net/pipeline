@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.6.3]
+
+### Fixed
+* handling break getting messages on pop3 client timeout exceptions is not working when the pop3 server is cutting the connection
+
 ## [1.6.2]
 
 ### Fixed
