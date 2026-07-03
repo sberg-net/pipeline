@@ -109,6 +109,8 @@ public class MailPop3GetMessages extends MailKeys implements PipelineOp {
                             }
                         }
                         mimeMessages.add(new MimeMessage((MimeMessage)message));
+                        logger.debug("Message download and added to list. POP3UID: {} TO: {} FROM: {}", folder.getUID(message),
+                                message.getRecipients(Message.RecipientType.TO)[0].toString(), message.getFrom()[0].toString());
                     }
                 } catch (MessagingException e) {
                     logger.error("Error on processing message", e);
