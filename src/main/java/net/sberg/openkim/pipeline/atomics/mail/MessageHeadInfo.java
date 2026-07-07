@@ -1,6 +1,7 @@
 package net.sberg.openkim.pipeline.atomics.mail;
 
 import jakarta.mail.Address;
+import jakarta.mail.Header;
 import lombok.Data;
 
 import java.util.Date;
@@ -17,4 +18,5 @@ public class MessageHeadInfo {
     private String uid;
     private String contentTypes;
     private Date sendDate;
+    private List<Header> allHeader;
 }

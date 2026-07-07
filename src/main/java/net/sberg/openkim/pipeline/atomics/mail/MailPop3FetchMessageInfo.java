@@ -99,6 +99,12 @@ public class MailPop3FetchMessageInfo extends MailKeys implements PipelineOp {
 
     private static MessageHeadInfo getMessageHeadInfo(Message msg, POP3Folder folder) throws MessagingException {
 
+        Enumeration<Header> allHeader = msg.getAllHeaders();
+        List<Header> allHeaderList = new ArrayList<>();
+        while (allHeader.hasMoreElements()) {
+            allHeaderList.add(allHeader.nextElement());
+        }
+
         return new MessageHeadInfo() {{
             setSubject(msg.getSubject());
             setSize(msg.getSize());
@@ -112,6 +118,7 @@ public class MailPop3FetchMessageInfo extends MailKeys implements PipelineOp {
                     : new ArrayList<>());
             setMsgId(msg.getHeader("Message-ID")[0]);
             setUid(folder.getUID(msg));
+            setAllHeader(allHeaderList);
         }};
     }
 }
