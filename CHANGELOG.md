@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.7.0]
+
+### Added
+* pop3fetchInfo: add a list of all headers to MessageHeadInfo
+
 ## [1.6.3]
 
 ### Fixed
