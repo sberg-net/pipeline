@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.7.1]
+
+### Fixed
+* NPE: debug log on MailFetchPop3Message
+
 ## [1.7.0]
 
 ### Added
