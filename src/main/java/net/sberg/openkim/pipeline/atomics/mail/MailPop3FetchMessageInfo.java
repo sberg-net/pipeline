@@ -79,7 +79,7 @@ public class MailPop3FetchMessageInfo extends MailKeys implements PipelineOp {
                     Header header = headers.nextElement();
                     allHeader.append(header.getName()).append(" = ").append(header.getValue()).append("\n");
                 }
-                logger.debug("All Header from Message (to: {}, from: {}):\n{}", msg.getRecipients(Message.RecipientType.TO)[0], msg.getFrom()[0], allHeader);
+                logger.debug("All Header from Message (to: {}, from: {}):\n{}", headInfo.getTo(), headInfo.getFrom(), allHeader);
             }
         } finally {
             try {
