@@ -54,7 +54,7 @@ public class MissingToFeldTest extends MailKeys {
         if (messages != null) {
             for(Message m : messages) {
                 log.info(m.getSubject());
-                log.info(m.getAllRecipients().toString());
+                assert m.getAllRecipients() == null;
             }
         }
     }
