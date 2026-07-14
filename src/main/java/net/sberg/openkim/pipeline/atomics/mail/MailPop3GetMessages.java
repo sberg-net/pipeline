@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Atomic MailGetMessages from Session.
@@ -104,8 +105,15 @@ public class MailPop3GetMessages extends MailKeys implements PipelineOp {
                 try {
                     if (pop3Uids.isEmpty() || pop3Uids.contains(folder.getUID(message))){
                         mimeMessages.add(new MimeMessage((MimeMessage)message));
+                        String recipient;
+                        if ( message.getRecipients(Message.RecipientType.TO) == null ){
+                            recipient = "notSet";
+                            logger.warn("Recipient of Message {} is NULL!", folder.getUID(message));
+                        } else {
+                            recipient = message.getRecipients(Message.RecipientType.TO)[0].toString();
+                        }
                         logger.debug("Message download and added to list. POP3UID: {} TO: {} FROM: {}", folder.getUID(message),
-                                message.getRecipients(Message.RecipientType.TO)[0].toString(), message.getFrom()[0].toString());
+                                recipient, message.getFrom()[0].toString());
 
                         if (!flags.isEmpty()){
                             for(Flags.Flag flag : flags) {
