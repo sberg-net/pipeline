@@ -1,0 +1,108 @@
+Return-Path: <kim_2@openkim.de>
+Delivered-To: st.schoenberg@sberg.net
+Received: from mxdirector4.masterlogin.de ([192.168.10.77])
+        by mxsan2.stor0.masterlogin.de with LMTP
+        id KPKNAsNXX2oKpSYABfXbxg
+        (envelope-from <kim_2@openkim.de>)
+        for <st.schoenberg@sberg.net>; Tue, 21 Jul 2026 11:28:03 +0000
+Received: from mxbox3.masterlogin.de ([192.168.10.78])
+        by mxdirector4.masterlogin.de with LMTP
+        id cNqPAsNXX2ow5yoAcU3DKA
+        (envelope-from <kim_2@openkim.de>)
+        for <st.schoenberg@sberg.net>; Tue, 21 Jul 2026 11:28:03 +0000
+Received: from t14 (dynamic-002-242-072-124.2.242.pool.telefonica.de [2.242.72.124])
+        by mxbox3.masterlogin.de (Postfix) with ESMTPSA id DC4A1360671
+        for <st.schoenberg@sberg.net>; Tue, 21 Jul 2026 11:28:02 +0000 (UTC)
+Received: from www461.your-server.de
+        by www461.your-server.de with LMTP
+        id ePqdCElXX2qkfwEAPes8hw
+        (envelope-from <kim_2@openkim.de>); Tue, 21 Jul 2026 13:26:01 +0200
+Envelope-to: kim_1@openkim.de
+Delivery-date: Tue, 21 Jul 2026 13:26:01 +0200
+Authentication-Results: www461.your-server.de;
+        iprev=pass (localhost) smtp.remote-ip=127.0.0.1;
+        spf=pass smtp.mailfrom=openkim.de;
+        dkim=pass header.d=openkim.de header.s=default2502 header.a=rsa-sha256;
+        dmarc=skipped
+Received: from localhost ([127.0.0.1] helo=www461.your-server.de)
+        by www461.your-server.de with esmtps  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+        (Exim 4.96.2)
+        (envelope-from <kim_2@openkim.de>)
+        id 1wm8bp-0000ED-0E
+        for kim_1@openkim.de;
+        Tue, 21 Jul 2026 13:26:01 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=openkim.de;
+        s=default2502; h=Reply-To:Subject:From:To:MIME-Version:Date:Message-ID:
+        Content-Type:Sender:Cc:Content-Transfer-Encoding:Content-ID:
+        Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+        :Resent-Message-ID:In-Reply-To:References;
+        bh=LCLdc0IjwBT2Hjq3SWNi2kmhrIjId7W5dahiREPgIjk=; b=pFS51QTvCRhQAbHJasW5BBz2uf
+        oJN5cn4c1+kOU3nMdHDOJMsZvuCnGLFJ7epk4eqwuNX6SsQzFUZcVLTxAKVydp+KOfmVKEa90EcMG
+        oCi8zMahIs5Qdx8dQ5loq3tkivRjZZs5dq+7b9NXBGRlTcYbp1Ng7OhVBEYbVsWPlPc2QQ0EDtsxE
+        yrnVpreU6l2uuuTm7GQiCgiSw4KHGWrmiIbpeyzMOXmsx6+oCpt3nuOvBwbZwrjnqRPSxtiLFv290
+        XBhl2a2wYk+i9Xe72iwig7/SLDwIPmIYUAlq9+jscOiUT7+PXU4d0IAjyhg+g9ZmgR9baN12FTPns
+        8pXSPEXg==;
+Received: from sslproxy02.your-server.de ([78.47.166.47])
+        by www461.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+        (Exim 4.96.2)
+        (envelope-from <kim_2@openkim.de>)
+        id 1wm8bo-0000E4-2g
+        for kim_1@openkim.de;
+        Tue, 21 Jul 2026 13:26:00 +0200
+Received: from localhost ([127.0.0.1])
+        by sslproxy02.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+        (Exim 4.96)
+        (envelope-from <kim_2@openkim.de>)
+        id 1wm8bo-000DmX-1b
+        for kim_1@openkim.de;
+        Tue, 21 Jul 2026 13:26:00 +0200
+Received: from localhost (EHLO [127.0.0.1]) ([127.0.0.1])
+          by t14 (JAMES SMTP Protocols Server) with ESMTP ID b88ab185
+          for <kim_1@openkim.de>;
+          Tue, 21 Jul 2026 13:24:03 +0200 (CEST)
+Content-Type: multipart/mixed; boundary="------------RX0XriZtHHwHnhcnGKe8vksf"
+Message-ID: <1041906340.17.1784633282398@t14>
+Date: Tue, 21 Jul 2026 13:24:03 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Content-Language: de-DE
+To: st.schoenberg@sberg.net
+From: kim_2@openkim.de
+Subject: Atta split mit HTML
+Reply-To: kim_2@openkim.de
+X-KIM-Dienstkennung: eNachricht;Lieferung;V2.1
+X-Virus-Scanned: Clear (ClamAV 1.4.3/28067/Tue Jul 21 08:23:56 2026)
+X-DKIM-Status: pass [(openkim.de) - 127.0.0.1]
+Delivered-To: kim_1@openkim.de
+X-Mail-ID: eb280536-1af7-4e8d-b47f-2e1516fa979b
+
+This is a multi-part message in MIME format.
+--------------RX0XriZtHHwHnhcnGKe8vksf
+Content-Type: multipart/alternative;
+ boundary="------------v5t9zyw4YRZ70ZbQo0aM0X77"
+
+--------------v5t9zyw4YRZ70ZbQo0aM0X77
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+
+
+  Atta split mit HTML
+
+--------------v5t9zyw4YRZ70ZbQo0aM0X77
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <h1>Atta split mit HTML</h1>
+  </body>
+</html>
+
+--------------v5t9zyw4YRZ70ZbQo0aM0X77--
+
+--------------RX0XriZtHHwHnhcnGKe8vksf--

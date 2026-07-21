@@ -29,7 +29,12 @@ public class MailModTextBody extends MailKeys implements PipelineOp {
 
     Logger logger = LoggerFactory.getLogger(MailModTextBody.class);
 
-    @SuppressWarnings("unchecked")
+    public enum Type {
+        REPLACE,
+        APPEND
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
     public Map<String,Object> execute(Map input)
             throws IOException, MessagingException, AtomicInputException {
@@ -54,14 +59,7 @@ public class MailModTextBody extends MailKeys implements PipelineOp {
 
         if (message.getContentType().contains("multipart")){
             Multipart multipart = (Multipart) message.getContent();
-            for (int i = 0; i < multipart.getCount(); i++){
-                BodyPart bodyPart = multipart.getBodyPart(i);
-                if (bodyPart.getContentType().contains("text")){
-                    String modifiedBodyText = modifyBodyText(bodyPart.getContent().toString(),
-                            bodyPart.getContentType(), modTextBodyPlain, modTextBodyHtml, modTextBodytype);
-                    bodyPart.setContent(modifiedBodyText, bodyPart.getContentType());
-                }
-            }
+            processMultipart(multipart, modTextBodyPlain, modTextBodyHtml, modTextBodytype);
         }
         else {
             String modifiedBodyText = modifyBodyText(message.getContent().toString(),
@@ -71,9 +69,18 @@ public class MailModTextBody extends MailKeys implements PipelineOp {
         return input;
     }
 
-    public enum Type {
-        REPLACE,
-        APPEND
+    private void processMultipart(Multipart multipart, String modTextBodyPlain, String modTextBodyHtml, Type modTextBodytype)
+            throws MessagingException, IOException {
+        for (int i = 0; i < multipart.getCount(); i++){
+            BodyPart bodyPart = multipart.getBodyPart(i);
+            if (bodyPart.getContentType().contains("multipart")) {
+                processMultipart((Multipart) bodyPart.getContent(), modTextBodyPlain, modTextBodyHtml, modTextBodytype);
+            } else if (bodyPart.getContentType().contains("text")){
+                String modifiedBodyText = modifyBodyText(bodyPart.getContent().toString(),
+                        bodyPart.getContentType(), modTextBodyPlain, modTextBodyHtml, modTextBodytype);
+                bodyPart.setContent(modifiedBodyText, bodyPart.getContentType());
+            }
+        }
     }
 
     private String modifyBodyText(String bodyText, String contentType, String modTextBodyPlain, String modTextBodyHtml, Type modTextBodytype)
