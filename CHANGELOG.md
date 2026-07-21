@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.7.4]
+
+### Fixed
+* by sure to send UTF-8 a creation Text MimeBodyPart 
+
 ## [1.7.3]
 
 ### Fixed
