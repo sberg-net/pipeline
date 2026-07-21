@@ -39,7 +39,7 @@ public class MailAddMimeBodyParts extends MailKeys implements PipelineOp {
 
     Logger logger = LoggerFactory.getLogger(MailAddMimeBodyParts.class);
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked","rawtypes"})
     @Override
     public Map<String,Object> execute(Map input)
             throws FileNotFoundException, MessagingException, AtomicInputException {
@@ -69,7 +69,7 @@ public class MailAddMimeBodyParts extends MailKeys implements PipelineOp {
             else if (part instanceof String partText){
                 logger.debug("Create MimeBodyPart from String (Text)");
                 MimeBodyPart mimeBodyPart = new MimeBodyPart();
-                mimeBodyPart.setText(partText);
+                mimeBodyPart.setText(partText, "UTF-8");
                 multipart.addBodyPart(mimeBodyPart);
             }
             else {
