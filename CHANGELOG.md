@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.7.3]
+
+### Fixed
+* fix MailModTextBody to handle nested multipart correctly
+
 ## [1.7.2]
 
 ### Fixed

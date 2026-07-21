@@ -6,7 +6,7 @@
 
     <groupId>net.sberg</groupId>
     <artifactId>pipeline</artifactId>
-    <version>1.7.2</version>
+    <version>1.7.3</version>
 
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
