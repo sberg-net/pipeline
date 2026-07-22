@@ -109,7 +109,9 @@ public class MailPop3FetchMessageInfo extends MailKeys implements PipelineOp {
             setSubject(msg.getSubject());
             setSize(msg.getSize());
             setSendDate(msg.getSentDate());
-            setFrom(List.of(msg.getFrom()));
+            setFrom(msg.getFrom() != null
+                    ? List.of(msg.getFrom())
+                    : new ArrayList<>());
             setTo(msg.getRecipients(Message.RecipientType.TO) != null
                     ? List.of(msg.getRecipients(Message.RecipientType.TO))
                     : new ArrayList<>());
