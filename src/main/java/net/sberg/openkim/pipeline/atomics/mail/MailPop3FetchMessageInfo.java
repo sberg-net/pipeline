@@ -120,7 +120,9 @@ public class MailPop3FetchMessageInfo extends MailKeys implements PipelineOp {
             setCc(msg.getRecipients(Message.RecipientType.CC) != null
                     ? List.of(msg.getRecipients(Message.RecipientType.CC))
                     : new ArrayList<>());
-            setMsgId(msg.getHeader("Message-ID")[0]);
+            setMsgId(msg.getHeader("Message-ID") != null
+                    ? msg.getHeader("Message-ID")[0]
+                    : "");
             setUid(folder.getUID(msg));
             setAllHeader(allHeaderList);
         }};
