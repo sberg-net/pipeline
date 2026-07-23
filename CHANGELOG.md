@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.7.6]
+
+### Fixed
+* handle Message-ID ist null when fetching messages
+
 ## [1.7.5]
 
 ### Fixed
