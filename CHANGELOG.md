@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.7.5]
+
+### Fixed
+* better handle null value on Header: subject and from
+
 ## [1.7.4]
 
 ### Fixed
