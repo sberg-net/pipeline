@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [1.7.7]
+
+### Fixed
+* handle NULL from addresses in MailPop3GetMessages
+
 ## [1.7.6]
 
 ### Fixed
