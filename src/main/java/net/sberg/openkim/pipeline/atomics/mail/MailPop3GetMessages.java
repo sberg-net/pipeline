@@ -104,22 +104,7 @@ public class MailPop3GetMessages extends MailKeys implements PipelineOp {
                 try {
                     if (pop3Uids.isEmpty() || pop3Uids.contains(folder.getUID(message))){
                         mimeMessages.add(new MimeMessage((MimeMessage)message));
-                        String recipient;
-                        if ( message.getRecipients(Message.RecipientType.TO) == null ){
-                            recipient = "notSet";
-                            logger.warn("Recipient of Message {} is NULL!", folder.getUID(message));
-                        } else {
-                            recipient = message.getRecipients(Message.RecipientType.TO)[0].toString();
-                        }
-                        String from;
-                        if ( message.getFrom() == null ){
-                            from = "notSet";
-                            logger.warn("From of Message {} is NULL!", folder.getUID(message));
-                        } else {
-                            from = message.getFrom()[0].toString();
-                        }
-                        logger.debug("Message download and added to list. POP3UID: {} TO: {} FROM: {}",
-                                folder.getUID(message), recipient, from);
+                        logger.debug("Message download and added to list. POP3UID: {}", folder.getUID(message));
 
                         if (!flags.isEmpty()){
                             for(Flags.Flag flag : flags) {
@@ -144,7 +129,6 @@ public class MailPop3GetMessages extends MailKeys implements PipelineOp {
         }
 
         input.put(MAIL_GETMESSAGES, mimeMessages);
-
         return input;
     }
 }
