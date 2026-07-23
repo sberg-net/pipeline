@@ -106,7 +106,9 @@ public class MailPop3FetchMessageInfo extends MailKeys implements PipelineOp {
         }
 
         return new MessageHeadInfo() {{
-            setSubject(msg.getSubject());
+            setSubject(msg.getSubject() != null
+                    ? msg.getSubject()
+                    : "");
             setSize(msg.getSize());
             setSendDate(msg.getSentDate());
             setFrom(msg.getFrom() != null
